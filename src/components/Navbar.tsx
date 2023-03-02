@@ -13,10 +13,14 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import {Link} from"react-router-dom"
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { yellow } from '@mui/material/colors';
+import { margin } from '@mui/system';
+ 
 
 
 const pages = [ 'Contact', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = [ 'Login','Register','carrinho'];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -45,19 +49,19 @@ function Navbar() {
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="/"
+            component={Link}
+            to={'/'}
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
+              color: 'white',
               textDecoration: 'none',
             }}
           >
-            LOGO
+          STORE
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -100,7 +104,7 @@ function Navbar() {
           </Box>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
-        
+       
             variant="h5"
             noWrap
             component="a"
@@ -115,8 +119,9 @@ function Navbar() {
               color: 'inherit',
               textDecoration: 'none',
             }}
+           
           >
-            LOGO
+          LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -136,6 +141,7 @@ function Navbar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
@@ -155,9 +161,12 @@ function Navbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
+            
               {settings.map((setting) => (
+              
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+              
+                  <Typography textAlign="center" margin='auto'  component={Link} to={`/${setting}`}> {setting.includes('carrinho') && <ShoppingCartIcon/>} {setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>
