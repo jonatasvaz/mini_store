@@ -1,14 +1,57 @@
 import { Button, Input } from '@mui/material';
-import {Container, Header,Form,Label} from"./LoginStyle"
+import {Container, Header,Form,Label,ButtonAuth} from"./LoginStyle"
 import React, { useState } from 'react'
-import Navbar from '../../components/Navbar'
+import  google from"../Img/google.png"
 import Api from '../services/Api';
 import { useNavigate } from 'react-router';
-import axios from 'axios';
+
  import { useAuth } from '../../Context/auth';
+import { auth } from '../services/firebase'
+ //import { GoogleAuthProvider } from "firebase/auth";
+ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+ 
+
+
 
 
 const Login = () => {
+   const provider = new GoogleAuthProvider();
+   provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+   provider.setCustomParameters({
+      'login_hint': 'user@example.com'
+    });
+
+
+
+    const GoogleLogin=()=>{
+  
+
+
+signInWithPopup(auth, provider)
+  .then((result) => {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential?.accessToken;
+    // The signed-in user info.
+    const user = result.user;
+      console.log(user)
+    // ...  
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    // ...
+  });
+     }
+
+
+
+
+
    const {setToken,setAuth} =useAuth()
    const navigate = useNavigate();
 
@@ -54,6 +97,10 @@ const Login = () => {
             <form onSubmit={ResponseLogin}>
                {error && <label>email invalido</label>}
             <Button type='submit'>Login</Button>
+
+              <ButtonAuth onClick={GoogleLogin}>
+                   <img src={google} alt="" />
+              </ButtonAuth>
             </form>
            
              

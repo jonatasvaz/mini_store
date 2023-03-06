@@ -8,6 +8,7 @@ export const Container = styled.div`
    margin: 40px auto;
     border:1px solid #1976d2;
     border-radius: 8px;
+    padding: 20px;
 
 `
 export const Header=styled.header`
@@ -22,4 +23,17 @@ export const Form= styled.form`
 `
 export const Label=styled.label`
 
+`
+
+export const ButtonAuth=styled.button`
+ border: none;
+display: flex;
+margin: 15px auto;
+border-radius: 20%;
+
+img{
+   width: 35px;
+   height: 35px;
+
+}
 `

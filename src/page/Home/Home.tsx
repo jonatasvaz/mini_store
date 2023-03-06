@@ -37,8 +37,11 @@ let arr: MyType[] = [
 ];
 
 function handleComprar(e: React.SyntheticEvent){
-  
-
+  console.log(e.target)
+  const t =e.target
+    if(t){
+    
+    }
 }
 
  
